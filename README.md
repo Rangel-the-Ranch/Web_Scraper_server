@@ -5,7 +5,7 @@ Web Scraper server
 **Как да стартираме?**
 
     1. Приложението е написано на Java, използвайки Java 21.
-    2. Неоходима е [https://jsoup.org/download](Jsoup 1.17.2)
+    2. Неоходима е [Jsoup 1.17.2](https://jsoup.org/download)
     3. Разполагаме с клас Main и Client. Main стартира сървъра, а Client - клиентите.
     4. Стартираме първо Main, след което стартираме Client.
 
@@ -14,6 +14,8 @@ Web Scraper server
     1. Сървърът отговарря на заявки от вида:
 
 *scrapeHTML <линк> <дълбочина>*
+
+
 *scrapeIMG <линк> <дълбочина>*
 
 
