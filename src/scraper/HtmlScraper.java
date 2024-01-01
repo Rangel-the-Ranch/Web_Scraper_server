@@ -1,0 +1,58 @@
+package scraper;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import java.io.IOException;
+import java.util.Set;
+import java.util.HashSet;
+
+public class HtmlScraper {
+    private static final int MAX_DEPTH = 3;
+    private static final String DEFAULT_WEBSITE = "https://example.com";
+    private final Set<String> visitedUrls = new HashSet<>();
+
+    public static void main(String[] args) {
+        HtmlScraper scraper = new HtmlScraper();
+        switch (args.length) {
+            case 0 -> scraper.crawl(DEFAULT_WEBSITE, MAX_DEPTH);
+            case 1 -> scraper.crawl(args[0], MAX_DEPTH);
+            default -> {
+                int depth = MAX_DEPTH - Integer.parseInt(args[1]);
+                if (depth < 0) {
+                    depth = 0;
+                }
+                scraper.crawl(args[0], depth);
+            }
+        }
+    }
+
+    private void crawl(String url, int depth) {
+        if (depth > MAX_DEPTH || visitedUrls.contains(url)) {
+            return;
+        }
+        try {
+            visitedUrls.add(url);
+            Document document = Jsoup.connect(url).get();
+
+            HtmlScraperMultiThread downloader = new HtmlScraperMultiThread(url);
+            Thread myThread = new Thread(downloader);
+            myThread.start();
+
+            Elements links = document.select("a[href]");
+            for (Element link : links) {
+                String nextUrl = link.absUrl("href");
+                crawl(nextUrl, depth + 1);
+            }
+        } catch (IOException e) {
+            /*
+            System.err.println("Error connecting to: " + url);
+            e.printStackTrace();
+            */
+        }
+    }
+
+
+
+}
