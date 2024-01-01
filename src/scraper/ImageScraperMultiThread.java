@@ -18,7 +18,7 @@ import java.nio.file.Path;
 
 
 public class ImageScraperMultiThread implements Runnable {
-    private static final String DOWNLOAD_FOLDER = "data/";
+    private static String DOWNLOAD_FOLDER = "data/";
     private final Document document;
 
     public ImageScraperMultiThread(Document document){
@@ -37,7 +37,18 @@ public class ImageScraperMultiThread implements Runnable {
             saveImage(imageUrl);
         }
     }
-
+    public static boolean changeFolder(String folderName){
+        if(folderName == null || folderName.trim().isEmpty() ){
+            return false;
+        }
+        for( char c : folderName.toCharArray() ){
+            if ( !(Character.isLetterOrDigit(c) || c == '_' || c =='-' || c=='.' || c==',') ){
+                return false;
+            }
+        }
+        DOWNLOAD_FOLDER = folderName+'/';
+        return true;
+    }
     private void saveImage(String imageUrl) {
         try {
             URL url = new URL(imageUrl);
