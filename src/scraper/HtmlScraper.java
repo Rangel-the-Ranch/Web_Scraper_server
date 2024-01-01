@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class HtmlScraper {
-    private static final int MAX_DEPTH = 3;
+    private static final int MAX_DEPTH = 5;
     private static final String DEFAULT_WEBSITE = "https://example.com";
     private final Set<String> visitedUrls = new HashSet<>();
 
