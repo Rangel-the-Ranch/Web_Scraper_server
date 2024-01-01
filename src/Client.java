@@ -4,18 +4,17 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Client {
     private static final int SERVER_PORT = 8080;
     private static final int BUFFER_SIZE = 1024;
-
-
     public static void main(String[] args) {
 
         try (SocketChannel socketChannel = SocketChannel.open();
-             BufferedReader reader = new BufferedReader(Channels.newReader(socketChannel, "UTF-8"));
-             PrintWriter writer = new PrintWriter(Channels.newWriter(socketChannel, "UTF-8"), true);
+             BufferedReader reader = new BufferedReader(Channels.newReader(socketChannel, StandardCharsets.UTF_8));
+             PrintWriter writer = new PrintWriter(Channels.newWriter(socketChannel, StandardCharsets.UTF_8), true);
              Scanner scanner = new Scanner(System.in)) {
 
             socketChannel.connect(new InetSocketAddress("localhost", SERVER_PORT));

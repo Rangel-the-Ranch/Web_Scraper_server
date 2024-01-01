@@ -11,6 +11,8 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
+//import java.time.LocalTime;
+//import java.time.format.DateTimeFormatter;
 
 public class Server {
     private static final int BUFFER_SIZE = 8192;
@@ -27,6 +29,7 @@ public class Server {
             selector = Selector.open();
             configureServerSocketChannel(serverSocketChannel, selector);
             this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
+            //noinspection InfiniteLoopStatement
             while (true) {
                 try {
                     int readyChannels = selector.select();
@@ -46,7 +49,17 @@ public class Server {
                             }
 
                             Command command = new Command();
+
+                            //LocalTime currentTime = LocalTime.now();
+                            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                            //String formattedTime = currentTime.format(formatter);
+                            //System.out.println("Current Time: " + formattedTime);
+
                             String output = Executor.exec(command.convert(clientInput));
+
+                            //currentTime = LocalTime.now();
+                            //formattedTime = currentTime.format(formatter);
+                            //System.out.println("Current Time: " + formattedTime);
 
 
                             writeClientOutput(clientChannel, output);
@@ -97,11 +110,9 @@ public class Server {
     }
 
     private void writeClientOutput(SocketChannel clientChannel, String output) throws IOException {
-
         buffer.clear();
         buffer.put(output.getBytes());
         buffer.flip();
-
         clientChannel.write(buffer);
     }
 

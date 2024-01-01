@@ -11,6 +11,7 @@ public class HtmlScraperMultiThread implements Runnable {
     private static String DOWNLOAD_FOLDER = "data/";
     private final String siteUrl;
 
+
     public HtmlScraperMultiThread(String siteUrl) {
         this.siteUrl = siteUrl;
     }
@@ -40,7 +41,10 @@ public class HtmlScraperMultiThread implements Runnable {
 
             File downloadFolder = new File(DOWNLOAD_FOLDER);
             if (!downloadFolder.exists()) {
-                downloadFolder.mkdir();
+                if(!downloadFolder.mkdir()){
+                    System.out.println("Error creating directory");
+                    return;
+                }
             }
 
             String fileName = DOWNLOAD_FOLDER + domain + "_downloaded_page.html";

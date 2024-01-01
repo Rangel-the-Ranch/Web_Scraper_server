@@ -1,7 +1,12 @@
+Project5.pdf
+
 ### IntelliJ IDEA ###
+data/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea/
+*.iml
 
 ### Eclipse ###
 .apt_generated
@@ -27,3 +32,47 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+
+
+#####################################################
+# Compiled class files
+*.class
+
+# Compiled files
+*.jar
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build output
+/out/
+
+# Dependency directories
+/target/
+/lib/
+
+# Generated files
+/generated/
+/generatedSources/
+
+# Environment-specific files
+.env
+
+# Maven specific files
+mvnw
+mvnw.cmd
+.mvn/
+
+# Gradle specific files
+.gradle/
+build/
+
+# Ignore .gitignore and .gitattributes files
+.gitignore
+.gitattributes

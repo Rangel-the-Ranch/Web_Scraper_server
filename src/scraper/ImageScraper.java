@@ -43,6 +43,7 @@ public class ImageScraper {
             ImageScraperMultiThread downloader = new ImageScraperMultiThread(document);
             Thread myThread = new Thread(downloader);
             myThread.start();
+            //myThread.run();
 
             Elements links = document.select("a[href]");
             for (Element link : links) {

@@ -5,6 +5,7 @@ import scraper.ImageScraper;
 import scraper.ImageScraperMultiThread;
 import scraper.HtmlScraperMultiThread;
 
+
 public class Executor {
     static public String exec(Command newCommand) {
         switch (newCommand.getCommand()) {
